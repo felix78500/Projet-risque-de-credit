@@ -12,4 +12,5 @@ pipeline = Pipeline([
 
 pipeline.fit(X_train, y_train)
 
+#ajout du pipeline a l'ia
 pickle.dump(pipeline, open('boite_a_IA.pkl', 'wb'))
