@@ -26,11 +26,11 @@ HEADERS = {
 #definir la premiere page lorsque on fait http://127.0.0.1:5000
 @app.route('/')
 
-
-
+#premiere page
 def home():
     return render_template('login.html')
 
+#page de prevision
 @app.route('/prevision')
 def prevision():
     return render_template('prevision.html')
@@ -54,6 +54,7 @@ def predict():
     #La prédiction retournée
     return jsonify({'prediction': prediction.tolist()})
 
+#ajouter des utilisateur (tester mais pas implementer)
 @app.route('/ajout-utilisateur', methods=['POST'])
 def ajout_utilisateur():
     data = request.json
@@ -64,6 +65,7 @@ def ajout_utilisateur():
     else:
         return jsonify({'message': 'Erreur insertion utilisateur'}), 500
 
+#pour verifier si l'utilisateur existe dans la bdd
 @app.route('/verif-utilisateur', methods=['POST'])
 def verif_utilisateur():
     data = request.json
