@@ -6,6 +6,7 @@ from sklearn.ensemble import RandomForestRegressor
 import matplotlib.pyplot as plt
 import numpy as np
 import pickle
+import joblib
 
 df = pd.read_csv('loan_data.csv')
 
@@ -48,6 +49,9 @@ print(f"MLPRegressor ABS = {ABS_RF}")
 for i in range(25):
     print(f"MLPRegressor Prédiction: {y_pred_mlp[i]}, Valeur réelle: {y_test[i]}, Difference : { y_test[i] - y_pred_mlp[i] } ")
 
+test = np.array([int(22), int(0), int(0), float(71948.0), int(0), int(3), float(35000.0), float(4), float(16.02), float(0.49), float(3.0), float(561), int(0)]).reshape(1, -1)
+test = scaler.transform(test)
+print(RF_model.predict(test))
 
 train_sizes, train_scores, test_scores = learning_curve(RF_model, X_train, y_train, cv=5, scoring='neg_mean_squared_error',
                                                         train_sizes=np.linspace(0.1, 1.0, 10))
@@ -71,9 +75,18 @@ kf = KFold(n_splits=5, shuffle=True, random_state=100)
 cv_scores_RF = cross_val_score(RF_model, X_train, y_train, cv=kf, scoring='neg_mean_squared_error')
 cv_scores_RF = -cv_scores_RF  
 
-with open('boite_a_IA.pkl','wb') as f:
-    pickle.dump(RF_model,f)
+joblib.dump(RF_model, 'boite_a_IA.joblib')
+joblib.dump(scaler, 'scaler.joblib')
 
+scaler = joblib.load('scaler.joblib')
+RF_model = joblib.load('boite_a_IA.joblib')
+    
+for i in range(25):
+    print(f"MLPRegressor Prédiction2: {y_pred_mlp[i]}, Valeur réelle: {y_test[i]}, Difference : { y_test[i] - y_pred_mlp[i] } ")
 
+print(RF_model.predict(test))
+
+    
+    
 print(f"MLPRegressor Cross-validation MSE scores: {cv_scores_RF}")
 print(f"MLPRegressor Mean cross-validation MSE: {cv_scores_RF.mean()}")
