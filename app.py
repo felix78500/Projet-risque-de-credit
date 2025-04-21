@@ -3,15 +3,19 @@ from flask_cors import CORS
 import numpy as np
 from flask import render_template
 import pickle
+import joblib
 from modelDao.UtilisateurDao import UtilisateurDao
 
 app = Flask(__name__)
 CORS(app)
 dao = UtilisateurDao()
+scaler = joblib.load('scaler.joblib')
+model = joblib.load('boite_a_IA.joblib')
 
-#pour pouvoir utiliser l'ia
-with open('boite_a_IA.pkl', 'rb') as file:
-    model = pickle.load(file)
+test = np.array([int(22), int(0), int(0), float(71948.0), int(0), int(3), float(35000.0), float(4), float(16.02), float(0.49), float(3.0), float(561), int(0)]).reshape(1, -1)
+
+test = scaler.transform(test)
+print(model.predict(test))
 
 dao = UtilisateurDao()
 
@@ -48,6 +52,7 @@ def predict():
     print("Features avant prédiction:", features)
 
     #l'utilisation de l'ia
+    features = scaler.transform(features)
     prediction = model.predict(features)
     print("Résultat brut:", prediction)
 
@@ -75,4 +80,4 @@ def verif_utilisateur():
         return jsonify({'message': 'Non trouvé'}), 404
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
