@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/prevision.css') }}">
   </head>
   <body>
-    <h1>Prédiction de prêt</h1>
+        <h1>Prédiction de prêt</h1>
 
+        <button onclick="window.location.href='/'" class="bouttonDeconnexion">Déconnexion</button>
+             
         <form id="prediction-form">
             <input type="text" id="person_age" name="person_age" placeholder="Âge" value="22">
 
@@ -17,7 +19,7 @@
                 <option value="1" selected>Female</option>
             </select>
 
-            <select id="person_education" name="person_education">
+            <select id="person_education" name="person_education" placeholder="Diplome">
                 <option value="0">Associate</option>
                 <option value="1">Bachelor</option>
                 <option value="2">Doctorate</option>
@@ -28,7 +30,7 @@
             <input type="text" id="person_income" name="person_income" placeholder="Revenu" value="71948.0">
             <input type="text" id="person_emp_exp" name="person_emp_exp" placeholder="Expérience professionnelle" value="0">
 
-            <select id="person_home_ownership" name="person_home_ownership">
+            <select id="person_home_ownership" name="person_home_ownership" placeholder="Situtation immobilière">
                 <option value="0">MORTGAGE</option>
                 <option value="1">OTHER</option>
                 <option value="2">OWN</option>
@@ -37,7 +39,7 @@
 
             <input type="text" id="loan_amnt" name="loan_amnt" placeholder="Montant du prêt" value="35000.0">
 
-            <select id="loan_intent" name="loan_intent">
+            <select id="loan_intent" name="loan_intent" placeholder="Raison du prêt">
                 <option value="0">DEBTCONSOLIDATION</option>
                 <option value="1">EDUCATION</option>
                  <option value="2">HOMEIMPROVEMENT</option>
@@ -51,15 +53,16 @@
             <input type="text" id="cb_person_cred_hist_length" name="cb_person_cred_hist_length" placeholder="Historique crédit" value="3.0">
             <input type="text" id="credit_score" name="credit_score" placeholder="Score crédit" value="561">
 
-            <select id="previous_loan_defaults_on_file" name="previous_loan_defaults_on_file">
+            <select id="previous_loan_defaults_on_file" name="previous_loan_defaults_on_file" placeholder="Prêt deja remboursée auparavant">
                 <option value="0">No</option>
                 <option value="1">Yes</option>
             </select>
 
-            <button type="submit">Prédire</button>
+            <button type="submit" onclick="window.location.href='/dashboard'">Prédire</button>
+            
         </form>
     <div id="result"></div>
-
+        
     <script src="{{ url_for('static', filename='js/prevision.js') }}" defer></script>
 
   </body>

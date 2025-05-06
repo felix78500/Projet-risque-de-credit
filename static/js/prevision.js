@@ -24,8 +24,8 @@ document.getElementById('prediction-form').addEventListener('submit', async (e) 
             body: JSON.stringify(data)
         });console.log('Status:', response.status);
 
-        const result = await response.json();
-        document.getElementById('result').textContent = `Prédiction: ${result.prediction}`;
+        //const result = await response.json();
+        //document.getElementById('result').textContent = `Prédiction: ${result.prediction*100} %`;
     } catch (error) {
         console.error('Erreur:', error);
         document.getElementById('result').textContent = `Erreur: ${error.message}`;

@@ -1,0 +1,36 @@
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <h1 class="titre">Résultat de la prédiction</h1>
+
+    <div id="result-container">
+        <div class="result-section">
+            <div class="result-title">Pourcentage de prédiction</div>
+            <div class="result-value" id="prediction-percentage">--%</div>
+        </div>
+
+        <div class="result-section">
+            <div class="result-title">Raison principale</div>
+            <div class="result-value" id="prediction-reason">Chargement...</div>
+        </div>
+
+        <div class="result-section">
+            <div class="result-title">Facteurs contributifs</div>
+            <div class="result-value" id="prediction-factors">Chargement...</div>
+        </div>
+
+        <div class="result-section">
+            <div class="result-title">Autres informations</div>
+            <div class="result-value" id="prediction-extra">Chargement...</div>
+        </div>
+
+        <div id="chart-container">
+            (Graphique de prédiction ici)
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+</body>
+

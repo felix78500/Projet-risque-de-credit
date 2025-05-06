@@ -2,8 +2,8 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import numpy as np
 from flask import render_template
-import pickle
 import joblib
+import json
 from modelDao.UtilisateurDao import UtilisateurDao
 
 app = Flask(__name__)
@@ -39,11 +39,15 @@ def home():
 def prevision():
     return render_template('prevision.html')
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
 # la methode pour envoyer des donnée a l'ia
 @app.route('/predict', methods=['POST'])
 def predict():
 
-    #récupere les donnée provenant de index.html
+    #récupere les donnée provenant de prediction.html
     data = request.json
     print("Données reçues:", data)
 
@@ -56,8 +60,21 @@ def predict():
     prediction = model.predict(features)
     print("Résultat brut:", prediction)
 
-    #La prédiction retournée
-    return jsonify({'prediction': prediction.tolist()})
+    #Reinitialiser le json
+    open("predictions.json", "w").close()
+
+    #La prédiction mise dans le json
+    with open("predictions.json", "a") as f:
+        record = {
+            "prediction": prediction.tolist()
+        }
+        f.write(json.dumps(record) + "\n")
+    
+@app.route('/get_prediction')
+def get_prediction():
+    with open('predictions.json', 'r') as f:
+        data = json.load(f)
+    return jsonify(data)
 
 #ajouter des utilisateur (tester mais pas implementer)
 @app.route('/ajout-utilisateur', methods=['POST'])
