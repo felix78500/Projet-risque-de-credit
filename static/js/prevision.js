@@ -18,14 +18,32 @@ document.getElementById('prediction-form').addEventListener('submit', async (e) 
     };
 
     try {
+        const detailsContainer = document.getElementById("details-container");
         const response = await fetch('/predict', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
         });console.log('Status:', response.status);
+        
+        fetch('/get_prediction')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('result').innerText = `Prédiction : ${data.prediction[0] * 100}%`;
+        });
 
-        //const result = await response.json();
-        //document.getElementById('result').textContent = `Prédiction: ${result.prediction*100} %`;
+        if (!document.getElementById("details-btn")) {
+            const detailBtn = document.createElement("button");
+            detailBtn.id = "details-btn";
+            detailBtn.textContent = "Voir les détails de la prédictions";
+            detailBtn.className = "detail-button";
+
+            detailBtn.addEventListener("click", function () {
+                window.location.href = "/dashboard";
+            });
+
+            detailsContainer.appendChild(detailBtn);
+        }
+        
     } catch (error) {
         console.error('Erreur:', error);
         document.getElementById('result').textContent = `Erreur: ${error.message}`;

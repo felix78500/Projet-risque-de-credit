@@ -16,6 +16,21 @@ h1 {
     font-family: 'Arial', sans-serif;
 }
 
+.bouttonDePrevision {
+    position: absolute;
+    top: 20px;
+    left: 1250px;
+    padding: 0.6rem 1.2rem;
+    background-color: #2f6e43;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 100, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
 #result-container {
     background-color: #ffffff;
     padding: 2rem;
