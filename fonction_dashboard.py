@@ -1,8 +1,10 @@
 import numpy as np
-import shapi
+import shap
 import joblib
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
+import os
+import matplotlib.ticker as mtick
 
 def analyse_donnees(modele, caracteristiques, noms_caracteristiques=None, afficher_graphique=True, 
                    sauvegarder_graphique=False, nom_fichier='analyse_shap.png'):
@@ -90,18 +92,16 @@ def analyse_donnees(modele, caracteristiques, noms_caracteristiques=None, affich
         plt.tight_layout()
         
         if sauvegarder_graphique:
-            plt.savefig(nom_fichier, dpi=300, bbox_inches='tight')
+            chemin_fichier = os.path.join('static', 'image', nom_fichier + '.png')
+            plt.savefig(chemin_fichier, dpi=300, bbox_inches='tight')
         
         if afficher_graphique:
             plt.show()
 
-    #graphique plus client-friendly
-    if sauvegarder_graphique:
-        import matplotlib.ticker as mtick
-
+        #graphique plus client-friendly
         valeurs = valeurs_shap.values[0]
         noms = noms_caracteristiques
-        couleurs = ['#ff33333' if v > 0 else '#9ECFF7' for v in valeurs] 
+        couleurs = ['#ff3333' if v > 0 else '#33bbff' for v in valeurs] 
         valeurs_arrondies = [round(v, 3) for v in valeurs]
 
         # Taille du graphique
@@ -131,11 +131,10 @@ def analyse_donnees(modele, caracteristiques, noms_caracteristiques=None, affich
             spine.set_visible(False)
 
         plt.tight_layout()
-
-        plt.savefig(nom_fichier+'.png', dpi=300, bbox_inches='tight')
         
-
-    
+        chemin_fichier2 = os.path.join('static', 'image', nom_fichier + '_simple.png')
+        plt.savefig(chemin_fichier2, dpi=300, bbox_inches='tight')
+        
     return resultats
 
 

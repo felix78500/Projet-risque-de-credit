@@ -30,35 +30,35 @@ liste_des_nom_simplifier=["Âge",
                           "Ancien prêt remboursé ?"]
 
 raison_si_positif = [
-    "Âge approprié pour un prêt stable",  # Âge
-    "Sexe sans impact significatif détecté",  # Sexe (peut être neutre ou inclusif selon votre modèle)
-    "Niveau d'études élevé, preuve de stabilité",  # Diplome
-    "Bon niveau de revenu, capacité de remboursement probable",  # Revenu
-    "Expérience professionnelle solide",  # Expérience professionnelle
-    "Situation immobilière stable (propriétaire ou logement stable)",  # Situtation immobilière
-    "Montant du prêt raisonnable par rapport aux revenus",  # Montant du prêt
-    "Raison du prêt jugée responsable (ex. : achat immobilier, investissement)",  # Raison du prêt
-    "Taux d'intérêt acceptable pour la situation financière",  # Taux d'intérêt
-    "Faible pourcentage du revenu alloué au remboursement",  # % du revenu
-    "Bon historique de crédit",  # Historique crédit
-    "Score de crédit élevé",  # Score crédit
-    "Ancien prêt bien remboursé, preuve de fiabilité"  # Ancien prêt remboursé ?
+    "Âge approprié pour un prêt stable",  
+    "Sexe sans impact significatif détecté",
+    "Niveau d'études élevé, preuve de stabilité", 
+    "Bon niveau de revenu, capacité de remboursement probable",
+    "Expérience professionnelle solide",
+    "Situation immobilière stable (propriétaire ou logement stable)",
+    "Montant du prêt raisonnable par rapport aux revenus", 
+    "Raison du prêt jugée responsable (ex. : achat immobilier, investissement)", 
+    "Taux d'intérêt acceptable pour la situation financière", 
+    "Faible pourcentage du revenu alloué au remboursement", 
+    "Bon historique de crédit",
+    "Score de crédit élevé",
+    "Ancien prêt bien remboursé, preuve de fiabilité" 
 ]
 
 raison_si_negatif = [
-    "Âge jugé trop jeune ou trop vieux pour un prêt long terme",  # Âge
-    "Le genre n'influence pas directement, mais pourrait être corrélé à d'autres risques (à traiter avec prudence)",  # Sexe
-    "Diplôme faible, risque accru d'instabilité professionnelle",  # Diplome
-    "Revenu trop faible pour couvrir les mensualités",  # Revenu
-    "Manque d'expérience professionnelle",  # Expérience professionnelle
-    "Situation immobilière instable (location précaire ou sans domicile fixe)",  # Situtation immobilière
-    "Montant du prêt trop élevé par rapport aux revenus",  # Montant du prêt
-    "Raison du prêt considérée comme risquée (ex. : loisirs, dettes antérieures)",  # Raison du prêt
-    "Taux d'intérêt trop élevé, risque de non-remboursement",  # Taux d'intérêt
-    "Pourcentage du revenu trop élevé dédié au remboursement",  # % du revenu
-    "Historique de crédit négatif ou inexistant",  # Historique crédit
-    "Score de crédit faible",  # Score crédit
-    "Ancien prêt non remboursé ou en défaut"  # Ancien prêt remboursé ?
+    "Âge jugé trop jeune ou trop vieux pour un prêt long terme",
+    "Le genre n'influence pas directement, mais pourrait être corrélé à d'autres risques (à traiter avec prudence)", 
+    "Diplôme faible, risque accru d'instabilité professionnelle", 
+    "Revenu trop faible pour couvrir les mensualités",  
+    "Manque d'expérience professionnelle",  
+    "Situation immobilière instable (location précaire ou sans domicile fixe)", 
+    "Montant du prêt trop élevé par rapport aux revenus", 
+    "Raison du prêt considérée comme risquée (ex. : loisirs, dettes antérieures)",  
+    "Taux d'intérêt trop élevé, risque de non-remboursement",  
+    "Pourcentage du revenu trop élevé dédié au remboursement",
+    "Historique de crédit négatif ou inexistant",  
+    "Score de crédit faible",
+    "Ancien prêt non remboursé ou en défaut" 
 ]
 
 
@@ -82,6 +82,7 @@ def home():
 def prevision():
     return render_template('prevision.html')
 
+#page du dashboard
 @app.route('/dashboard')
 def dashboard():
     return render_template('dashboard.html')
@@ -157,28 +158,28 @@ def analyse():
     results = []
     i=0
     for nom, valeur in resultat.items():
-        if not nom.startswith('_'):
-            if resultat['_prediction'] < 0.70:
-                results.append({
-                    "nom": nom,
-                    "valeur": valeur,
-                    "nom_simplifié": liste_des_nom_simplifier[i], 
-                    "raison": raison_si_negatif[i]
-                })
-                i+=1
-            else : 
-                results.append({
-                    "nom": nom,
-                    "valeur": valeur,
-                    "nom_simplifié": liste_des_nom_simplifier[i], 
-                    "raison": raison_si_positif[i]
-                })
-                i+=1
-
-        
-
+            if not nom.startswith('_'):
+                if resultat['_prediction'] < 0.70:
+                    results.append({
+                        "nom": nom,
+                        "valeur": valeur,
+                        "nom_simplifie": liste_des_nom_simplifier[i], 
+                        "raison": raison_si_negatif[i]
+                    })
+                    i+=1
+                else : 
+                    results.append({
+                        "nom": nom,
+                        "valeur": valeur,
+                        "nom_simplifie": liste_des_nom_simplifier[i], 
+                        "raison": raison_si_positif[i]
+                    })
+                    i+=1
+    
     with open("analyse.json", "w") as f:
         json.dump(results, f, indent=4)
+
+    return jsonify({"status": "ok"})
 
 @app.route('/get_analyse')
 def get_analyse():

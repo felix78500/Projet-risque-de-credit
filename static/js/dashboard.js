@@ -3,17 +3,27 @@ fetch('/get_prediction')
   .then(data => {
     x100 = data.prediction[0] * 100
     document.getElementById('prediction-percentage').innerText = `Prédiction : ${x100}%`;
-    if(x100 < 70){
+    
+    fetch('/get_analyse')
+    .then(res => res.json())
+    .then(data => {
+      if(x100 < 70){
       document.getElementById('prediction-status').innerText = `Refuser`;
+      const minItem = data.find(item => item.valeur === Math.min(...data.map(i => i.valeur)))
+      document.getElementById('prediction-reason').innerText = `${minItem.nom}`;
+      document.getElementById('prediction-desc').innerText = `${minItem.raison}`;
+
+
     }
     else{
       document.getElementById('prediction-status').innerText = `Accepter`;
+      const maxItem = data.find(item => item.valeur === Math.max(...data.map(i => i.valeur)))
+      document.getElementById('prediction-reason').innerText = `${maxItem.nom}`;
+      document.getElementById('prediction-desc').innerText = `${maxItem.raison}`;
+
     }
-    fetch('get_analyse')
-    .then(res => res.json())
-    .then(data => {
-    document.getElementById('prediction-percentage').innerText = `Prédiction : ${data.prediction[0] * 100}%`;
-  });
+    });
+    
   });
 
   

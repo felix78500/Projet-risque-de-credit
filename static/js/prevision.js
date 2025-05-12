@@ -24,11 +24,28 @@ document.getElementById('prediction-form').addEventListener('submit', async (e) 
             body: JSON.stringify(data)
         });console.log('Status:', response.status);
 
-        await fetch('/analyse',{
+        const analyseResponse = await fetch('/analyse',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
-        });
+        });console.log("Analyse status:", analyseResponse.status);
+        const analyseData = await analyseResponse.json();
+        console.log("Analyse response:", analyseData);
+
+        const detailsContainer = document.getElementById("details-container");
+
+        if (!document.getElementById("details-btn")) {
+            const detailBtn = document.createElement("button");
+            detailBtn.id = "details-btn";
+            detailBtn.textContent = "Voir les détails de la prédiction";
+            detailBtn.className = "detail-button";
+
+            detailBtn.addEventListener("click", function () {
+                window.location.href = "/dashboard";
+            });
+
+            detailsContainer.appendChild(detailBtn);
+        }
 
         //const result = await response.json();
         //document.getElementById('result').textContent = `Prédiction: ${result.prediction*100} %`;
