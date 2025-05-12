@@ -29,20 +29,6 @@ liste_des_nom_simplifier=["Âge",
                           "Score crédit",
                           "Ancien prêt remboursé ?"]
 
-liste_des_nom_simplifier=["Âge", 
-                          "Sexe",
-                          "Diplome", 
-                          "Revenu", 
-                          "Expérience professionnelle", 
-                          "Situtation immobilière",
-                          "Montant du prêt",
-                          "Raison du prêt",
-                          "Taux d'intérêt",
-                          "% ,du revenu",
-                          "Historique crédit",
-                          "Score crédit",
-                          "Ancien prêt remboursé ?"]
-
 raison_si_positif = [
     "Âge approprié pour un prêt stable",  # Âge
     "Sexe sans impact significatif détecté",  # Sexe (peut être neutre ou inclusif selon votre modèle)
@@ -156,7 +142,6 @@ def verif_utilisateur():
 @app.route('/analyse', methods=['POST'])
 def analyse():
     data = request.json
-
     
     test = [int(data['person_age']), int(data['person_gender']), int(data['person_education']), 
             float(data['person_income']), int(data['person_emp_exp']), int(data['person_home_ownership']), 
@@ -173,12 +158,24 @@ def analyse():
     i=0
     for nom, valeur in resultat.items():
         if not nom.startswith('_'):
-            results.append({
-                "nom": nom,
-                "valeur": valeur,
-                "nom_simplifié": liste_des_nom_simplifier[i]
-            })
-        i+=1
+            if resultat['_prediction'] < 0.70:
+                results.append({
+                    "nom": nom,
+                    "valeur": valeur,
+                    "nom_simplifié": liste_des_nom_simplifier[i], 
+                    "raison": raison_si_negatif[i]
+                })
+                i+=1
+            else : 
+                results.append({
+                    "nom": nom,
+                    "valeur": valeur,
+                    "nom_simplifié": liste_des_nom_simplifier[i], 
+                    "raison": raison_si_positif[i]
+                })
+                i+=1
+
+        
 
     with open("analyse.json", "w") as f:
         json.dump(results, f, indent=4)

@@ -24,6 +24,12 @@ document.getElementById('prediction-form').addEventListener('submit', async (e) 
             body: JSON.stringify(data)
         });console.log('Status:', response.status);
 
+        await fetch('/analyse',{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        });
+
         //const result = await response.json();
         //document.getElementById('result').textContent = `Prédiction: ${result.prediction*100} %`;
     } catch (error) {

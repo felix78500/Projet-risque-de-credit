@@ -1,5 +1,5 @@
 import numpy as np
-import shap
+import shapi
 import joblib
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
@@ -101,7 +101,7 @@ def analyse_donnees(modele, caracteristiques, noms_caracteristiques=None, affich
 
         valeurs = valeurs_shap.values[0]
         noms = noms_caracteristiques
-        couleurs = ['#f33333' if v > 0 else '#9ECFF7' for v in valeurs] 
+        couleurs = ['#ff33333' if v > 0 else '#9ECFF7' for v in valeurs] 
         valeurs_arrondies = [round(v, 3) for v in valeurs]
 
         # Taille du graphique
@@ -113,7 +113,7 @@ def analyse_donnees(modele, caracteristiques, noms_caracteristiques=None, affich
         ax.axvline(0, color='black', linewidth=0.8)
         ax.xaxis.set_major_formatter(mtick.FuncFormatter(lambda x, _: f'{x:.2f}'))
 
-        ax.tick_params(axis='y', labelsize=12)
+        ax.tick_params(axis='y', labelsize=15)
         ax.tick_params(axis='x', labelsize=11)
         ax.set_facecolor('white')
         fig.patch.set_facecolor('white')
