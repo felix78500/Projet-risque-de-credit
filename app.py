@@ -27,7 +27,7 @@ liste_des_nom_simplifier=["Âge",
                           "% ,du revenu",
                           "Historique crédit",
                           "Score crédit",
-                          "Ancien prêt remboursé ?"]
+                          "Defaut de dette auparavant"]
 
 raison_si_positif = [
     "Âge approprié pour un prêt stable",  

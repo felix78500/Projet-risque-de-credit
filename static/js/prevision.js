@@ -32,6 +32,15 @@ document.getElementById('prediction-form').addEventListener('submit', async (e) 
         const analyseData = await analyseResponse.json();
         console.log("Analyse response:", analyseData);
 
+        fetch('/get_prediction')
+        .then(res => res.json())
+        .then(data => {
+            x100 = data.prediction[0] * 100
+            document.getElementById('result').innerText = `Prédiction : ${x100}%`;
+            
+        });
+
+
         const detailsContainer = document.getElementById("details-container");
 
         if (!document.getElementById("details-btn")) {

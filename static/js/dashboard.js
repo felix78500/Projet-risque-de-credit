@@ -26,9 +26,6 @@ fetch('/get_prediction')
     
   });
 
-  
-
-
   document.addEventListener("DOMContentLoaded", function () {
     const imageElement = document.querySelector("#chart-container img");
     const changeBtn = document.getElementById("change-image-btn");
