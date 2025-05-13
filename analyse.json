@@ -1,80 +1,80 @@
 [
     {
         "nom": "\u00c2ge",
-        "valeur": 0.00027833483410590656,
+        "valeur": 0.0008446731851762815,
         "nom_simplifie": "\u00c2ge",
-        "raison": "\u00c2ge jug\u00e9 trop jeune ou trop vieux pour un pr\u00eat long terme"
+        "raison": "\u00c2ge appropri\u00e9 pour un pr\u00eat stable"
     },
     {
         "nom": "Sexe",
-        "valeur": -0.00012371667124519038,
+        "valeur": -0.00029703809959913386,
         "nom_simplifie": "Sexe",
-        "raison": "Le genre n'influence pas directement, mais pourrait \u00eatre corr\u00e9l\u00e9 \u00e0 d'autres risques (\u00e0 traiter avec prudence)"
+        "raison": "Sexe sans impact significatif d\u00e9tect\u00e9"
     },
     {
         "nom": "Diplome",
-        "valeur": -0.0003276850501672287,
+        "valeur": -0.0020646519980835327,
         "nom_simplifie": "Diplome",
-        "raison": "Dipl\u00f4me faible, risque accru d'instabilit\u00e9 professionnelle"
+        "raison": "Niveau d'\u00e9tudes \u00e9lev\u00e9, preuve de stabilit\u00e9"
     },
     {
         "nom": "Revenu",
-        "valeur": 0.015018211911028872,
+        "valeur": 0.021768233161140994,
         "nom_simplifie": "Revenu",
-        "raison": "Revenu trop faible pour couvrir les mensualit\u00e9s"
+        "raison": "Bon niveau de revenu, capacit\u00e9 de remboursement probable"
     },
     {
         "nom": "Exp\u00e9rience professionnelle",
-        "valeur": 0.00016282635492613785,
+        "valeur": -3.640821092894411e-06,
         "nom_simplifie": "Exp\u00e9rience professionnelle",
-        "raison": "Manque d'exp\u00e9rience professionnelle"
+        "raison": "Exp\u00e9rience professionnelle solide"
     },
     {
         "nom": "Situtation immobili\u00e8re",
-        "valeur": 0.014204009770495464,
+        "valeur": 0.04683638350971576,
         "nom_simplifie": "Situtation immobili\u00e8re",
-        "raison": "Situation immobili\u00e8re instable (location pr\u00e9caire ou sans domicile fixe)"
+        "raison": "Situation immobili\u00e8re stable (propri\u00e9taire ou logement stable)"
     },
     {
         "nom": "Montant du pr\u00eat",
-        "valeur": 0.004835771279250871,
+        "valeur": 0.005741216897017127,
         "nom_simplifie": "Montant du pr\u00eat",
-        "raison": "Montant du pr\u00eat trop \u00e9lev\u00e9 par rapport aux revenus"
+        "raison": "Montant du pr\u00eat raisonnable par rapport aux revenus"
     },
     {
         "nom": "Raison du pr\u00eat",
-        "valeur": -0.007680758819039616,
+        "valeur": -0.019410348066525255,
         "nom_simplifie": "Raison du pr\u00eat",
-        "raison": "Raison du pr\u00eat consid\u00e9r\u00e9e comme risqu\u00e9e (ex. : loisirs, dettes ant\u00e9rieures)"
+        "raison": "Raison du pr\u00eat jug\u00e9e responsable (ex. : achat immobilier, investissement)"
     },
     {
         "nom": "Taux d'int\u00e9r\u00eat",
-        "valeur": 0.048713731905839885,
+        "valeur": 0.08770905706991769,
         "nom_simplifie": "Taux d'int\u00e9r\u00eat",
-        "raison": "Taux d'int\u00e9r\u00eat trop \u00e9lev\u00e9, risque de non-remboursement"
+        "raison": "Taux d'int\u00e9r\u00eat acceptable pour la situation financi\u00e8re"
     },
     {
         "nom": "% ,du revenu",
-        "valeur": 0.07859632852783684,
+        "valeur": 0.2050940517028123,
         "nom_simplifie": "% ,du revenu",
-        "raison": "Pourcentage du revenu trop \u00e9lev\u00e9 d\u00e9di\u00e9 au remboursement"
+        "raison": "Faible pourcentage du revenu allou\u00e9 au remboursement"
     },
     {
         "nom": "Historique cr\u00e9dit",
-        "valeur": -3.419948886155717e-05,
+        "valeur": 0.0001956893416104839,
         "nom_simplifie": "Historique cr\u00e9dit",
-        "raison": "Historique de cr\u00e9dit n\u00e9gatif ou inexistant"
+        "raison": "Bon historique de cr\u00e9dit"
     },
     {
         "nom": "Score cr\u00e9dit",
-        "valeur": 0.014647747485380136,
+        "valeur": 0.028504284635897832,
         "nom_simplifie": "Score cr\u00e9dit",
-        "raison": "Score de cr\u00e9dit faible"
+        "raison": "Score de cr\u00e9dit \u00e9lev\u00e9"
     },
     {
-        "nom": "Defaut de dette auparavant ?",
-        "valeur": -0.3907425464839912,
-        "nom_simplifie": "Defaut de dette auparavant ?",
-        "raison": "Ancien pr\u00eat non rembours\u00e9 ou en d\u00e9faut"
+        "nom": "Defaut de dette auparavant",
+        "valeur": 0.4026301450375638,
+        "nom_simplifie": "Defaut de dette auparavant",
+        "raison": "Ancien pr\u00eat bien rembours\u00e9, preuve de fiabilit\u00e9"
     }
 ]

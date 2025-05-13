@@ -102,7 +102,8 @@ def analyse_donnees(modele, caracteristiques, noms_caracteristiques=None, affich
         valeurs = valeurs_shap.values[0]
         noms = noms_caracteristiques
         couleurs = ['#ff3333' if v > 0 else '#33bbff' for v in valeurs] 
-        valeurs_arrondies = [round(v, 3) for v in valeurs]
+        valeurs_arrondies = [round(v*100, 3) for v in valeurs]
+        
 
         # Taille du graphique
         fig, ax = plt.subplots(figsize=(12, 0.7 * len(noms))) 
