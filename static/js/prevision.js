@@ -16,8 +16,18 @@ document.getElementById('prediction-form').addEventListener('submit', async (e) 
         credit_score: document.getElementById('credit_score').value,
         previous_loan_defaults_on_file: parseInt(document.getElementById('previous_loan_defaults_on_file').value),
     };
+    let champsVides = [];
 
-    try {
+    for (const [key, value] of Object.entries(data)) {
+        if (value === "" || value === null || value === undefined) {
+            champsVides.push(key);
+        }
+    }
+
+    if (champsVides.length > 0) {
+            document.getElementById('result').innerText = `Tout les champs n'ont pas été remplie : ${champsVides.join(", ")}`;
+    }else{
+        try {
         const response = await fetch('/predict', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -61,5 +71,6 @@ document.getElementById('prediction-form').addEventListener('submit', async (e) 
     } catch (error) {
         console.error('Erreur:', error);
         document.getElementById('result').textContent = `Erreur: ${error.message}`;
+    }
     }
 });
