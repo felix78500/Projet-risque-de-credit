@@ -1,6 +1,7 @@
 document.getElementById('prediction-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    //tout les champ réuni dans data
     const data = {
         person_age: document.getElementById('person_age').value,
         person_gender: document.getElementById('person_gender').value,

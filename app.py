@@ -10,7 +10,10 @@ from model.fonction_dashboard import analyse_donnees
 
 app = Flask(__name__)
 CORS(app)
+#instanciation de la manipulation de l'utilsateur via dao
 dao = UtilisateurDao()
+
+#importation du scaller et du model
 chemin_scaler= os.path.join('ConcerneIa', 'scaler.joblib')
 chemin_model= os.path.join('ConcerneIa', 'boite_a_IA.joblib')
 
@@ -19,6 +22,7 @@ model = joblib.load(chemin_model)
 
 dao = UtilisateurDao()
 
+#les different liste pour simplifier la vie de l'utilisateur
 liste_des_nom_simplifier=["Âge", 
                           "Sexe",
                           "Diplome", 
@@ -65,9 +69,11 @@ raison_si_negatif = [
     "Ancien prêt non remboursé ou en défaut" 
 ]
 
+#importation des fichier json
 chemin_json_prediction = os.path.join('static', 'json', 'predictions.json')
 chemin_json_analyse = os.path.join('static', 'json', 'analyse.json')
 
+#identifiant de connexion a la base de donnée
 SUPABASE_URL = 'https://xcpqafebvepowoxxppsd.supabase.co'
 SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhjcHFhZmVidmVwb3dveHhwcHNkIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NDEwNzc2NiwiZXhwIjoyMDU5NjgzNzY2fQ.66tUU4BoxxJ8KXcsrbstY3j8Jm38f-M8MadlycAdwUY'
 HEADERS = {
@@ -120,13 +126,14 @@ def predict():
         }
         f.write(json.dumps(record) + "\n")
     
+#permet de prendre la prediction via le fichier json
 @app.route('/get_prediction')
 def get_prediction():
     with open(chemin_json_prediction, 'r') as f:
         data = json.load(f)
     return jsonify(data)
 
-#ajouter des utilisateur (tester mais pas implementer)
+#ajouter des utilisateur (tester mais pas implementer, et ne seras probablement jamais)
 @app.route('/ajout-utilisateur', methods=['POST'])
 def ajout_utilisateur():
     data = request.json
@@ -146,25 +153,34 @@ def verif_utilisateur():
     else:
         return jsonify({'message': 'Non trouvé'}), 404
 
+#Analyse des données 
 @app.route('/analyse', methods=['POST'])
 def analyse():
+    #les champs que l'utilisateur a pris
     data = request.json
     
+    #on met tout sa dans un tableau en le transformant dans ce qui nous arrange le plus
     test = [int(data['person_age']), int(data['person_gender']), int(data['person_education']), 
             float(data['person_income']), int(data['person_emp_exp']), int(data['person_home_ownership']), 
              float(data['loan_amnt']), float(data['loan_intent']), float(data['loan_int_rate']), 
              float(data['loan_percent_income']), float(data['cb_person_cred_hist_length']), float(data['credit_score']), int(data['previous_loan_defaults_on_file'])]
     
+    #normaliser le tout
     test_normalise = scaler.transform(np.array(test).reshape(1, -1))[0]
 
+    #utilisation de la fonction d'analyse
     resultat = analyse_donnees(model, test_normalise, liste_des_nom_simplifier, afficher_graphique=False, sauvegarder_graphique=True, nom_fichier='analyse_impact_caracteristiques')
 
+    #ouverture du fichier json pour effacer tout ce qui s'y trouve dedans
     open(chemin_json_analyse, "w").close()
 
+    #le tableau results pour ensuite tout mettre dans le fichier json
     results = []
     i=0
     for nom, valeur in resultat.items():
+            #ce if est la pour pas que la prediction et la valeur de base ne se mette dans le json
             if not nom.startswith('_'):
+                #ce if est pour changer la raison selon le pourcentage
                 if resultat['_prediction'] < 0.70:
                     results.append({
                         "nom": nom,
@@ -182,11 +198,14 @@ def analyse():
                     })
                     i+=1
     
+    #mettre tout ce qui se trouve dans le tableau, dans notre fichier json
     with open(chemin_json_analyse, "w") as f:
         json.dump(results, f, indent=4)
 
+    #ça, c'est pour debogguer en cas de probleme (il y en as eu)
     return jsonify({"status": "ok"})
 
+#simplement pour prendre le fichier json
 @app.route('/get_analyse')
 def get_analyse():
     with open(chemin_json_analyse, 'r') as f:
