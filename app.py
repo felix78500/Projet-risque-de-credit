@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import numpy as np
@@ -5,13 +6,16 @@ from flask import render_template
 import joblib
 import json
 from modelDao.UtilisateurDao import UtilisateurDao
-from fonction_dashboard import analyse_donnees
+from model.fonction_dashboard import analyse_donnees
 
 app = Flask(__name__)
 CORS(app)
 dao = UtilisateurDao()
-scaler = joblib.load('scaler.joblib')
-model = joblib.load('boite_a_IA.joblib')
+chemin_scaler= os.path.join('ConcerneIa', 'scaler.joblib')
+chemin_model= os.path.join('ConcerneIa', 'boite_a_IA.joblib')
+
+scaler = joblib.load(chemin_scaler)
+model = joblib.load(chemin_model)
 
 dao = UtilisateurDao()
 
