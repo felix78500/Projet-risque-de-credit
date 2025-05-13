@@ -50,7 +50,6 @@ document.getElementById('prediction-form').addEventListener('submit', async (e) 
             
         });
 
-
         const detailsContainer = document.getElementById("details-container");
 
         if (!document.getElementById("details-btn")) {

@@ -65,6 +65,8 @@ raison_si_negatif = [
     "Ancien prêt non remboursé ou en défaut" 
 ]
 
+chemin_json_prediction = os.path.join('static', 'json', 'predictions.json')
+chemin_json_analyse = os.path.join('static', 'json', 'analyse.json')
 
 SUPABASE_URL = 'https://xcpqafebvepowoxxppsd.supabase.co'
 SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhjcHFhZmVidmVwb3dveHhwcHNkIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NDEwNzc2NiwiZXhwIjoyMDU5NjgzNzY2fQ.66tUU4BoxxJ8KXcsrbstY3j8Jm38f-M8MadlycAdwUY'
@@ -109,10 +111,10 @@ def predict():
     print("Résultat brut:", prediction)
 
     #Reinitialiser le json
-    open("predictions.json", "w").close()
+    open(chemin_json_prediction, "w").close()
 
     #La prédiction mise dans le json
-    with open("predictions.json", "a") as f:
+    with open(chemin_json_prediction, "a") as f:
         record = {
             "prediction": prediction.tolist()
         }
@@ -120,7 +122,7 @@ def predict():
     
 @app.route('/get_prediction')
 def get_prediction():
-    with open('predictions.json', 'r') as f:
+    with open(chemin_json_prediction, 'r') as f:
         data = json.load(f)
     return jsonify(data)
 
@@ -157,7 +159,7 @@ def analyse():
 
     resultat = analyse_donnees(model, test_normalise, liste_des_nom_simplifier, afficher_graphique=False, sauvegarder_graphique=True, nom_fichier='analyse_impact_caracteristiques')
 
-    open("analyse.json", "w").close()
+    open(chemin_json_analyse, "w").close()
 
     results = []
     i=0
@@ -180,14 +182,14 @@ def analyse():
                     })
                     i+=1
     
-    with open("analyse.json", "w") as f:
+    with open(chemin_json_analyse, "w") as f:
         json.dump(results, f, indent=4)
 
     return jsonify({"status": "ok"})
 
 @app.route('/get_analyse')
 def get_analyse():
-    with open('analyse.json', 'r') as f:
+    with open(chemin_json_analyse, 'r') as f:
         data = json.load(f)
     return jsonify(data)
 
