@@ -16,8 +16,18 @@ document.getElementById('prediction-form').addEventListener('submit', async (e) 
         credit_score: document.getElementById('credit_score').value,
         previous_loan_defaults_on_file: parseInt(document.getElementById('previous_loan_defaults_on_file').value),
     };
-    let champsVides = [];
 
+    let champsVides = [];
+    let champString = [];
+
+    //verifier qu'il n'y a pas de lettre
+    for (const [key, value] of Object.entries(data)) {
+        if (!/^\d+(\.\d+)?$/.test(value)) {
+            champString.push(key);
+        }
+    }
+
+    //verifier qu'il n'y as pas de blanc
     for (const [key, value] of Object.entries(data)) {
         if (value === "" || value === null || value === undefined) {
             champsVides.push(key);
@@ -26,7 +36,10 @@ document.getElementById('prediction-form').addEventListener('submit', async (e) 
 
     if (champsVides.length > 0) {
             document.getElementById('result').innerText = `Tout les champs n'ont pas été remplie : ${champsVides.join(", ")}`;
+    }else if(champString.length > 0){
+            document.getElementById('result').innerText = `Certain champ ne sont pas dans le bon format (1234...) : ${champString.join(", ")}`;
     }else{
+        //Utilisation de la prédiction et de l'analyse
         try {
         const response = await fetch('/predict', {
             method: 'POST',
@@ -52,6 +65,7 @@ document.getElementById('prediction-form').addEventListener('submit', async (e) 
 
         const detailsContainer = document.getElementById("details-container");
 
+        //apres avoir cliquer sur la prediction, et qu'il n'y as pas d'erreur, affiche le boutton pour afficher plus de détail
         if (!document.getElementById("details-btn")) {
             const detailBtn = document.createElement("button");
             detailBtn.id = "details-btn";
