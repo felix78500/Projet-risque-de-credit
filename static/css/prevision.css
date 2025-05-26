@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #e6ffe6, #f5fff7);
+    color: #1f4323;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #2f6e43;
+    text-align: center;
+}
+
+
+.bouttonDeconnexion {
+    position: absolute;
+    top: 20px;
+    left: 1210px;
+    padding: 0.6rem 1.2rem;
+    background-color: #2f6e43;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 100, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.bouttonDeconnexion:hover {
+    background-color: #256e39;
+    transform: translateY(-2px);
+}
+
+.bouttonDeconnexion:active {
+    transform: scale(0.98);
+}
+
+#prediction-form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 100, 0, 0.25);
+    width: 90%;
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+    align-items: center;
+}
+
+#prediction-form input,
+#prediction-form select {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #b2d8b2;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+#prediction-form input:focus,
+#prediction-form select:focus {
+    border-color: #2f6e43;
+}
+
+#result {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #256e39;
+    text-align: center;
+}
+
+.button-group {
+    grid-column: span 2;
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.button-group button,
+.button-group .detail-button {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Bouton Prédire */
+#predict-btn {
+    background-color: #2f6e43;
+    color: #fff;
+}
+
+#predict-btn:hover {
+    background-color: #256e39;
+    transform: translateY(-2px);
+}
+
+#predict-btn:active {
+    transform: scale(0.98);
+}
+
+/* Bouton Voir les détails */
+.detail-button {
+    background-color: #bd1a1a;
+    color: white;
+}
+
+.detail-button:hover {
+    background-color: #ff2424;
+    transform: translateY(-2px);
+}
+
+.detail-button:active {
+    transform: scale(0.98);
+}

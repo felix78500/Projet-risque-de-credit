@@ -1,0 +1,44 @@
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <h1 class="titre">Résultat de la prédiction</h1>
+
+    <button onclick="window.location.href='/prevision'" class="bouttonDeconnexion">Retour</button>
+
+
+    <div id="result-container">
+        <div class="result-section">
+            <div class="result-title">Pourcentage de prédiction</div>
+            <div class="result-value" id="prediction-percentage">--%</div>
+        </div>
+
+        <div class="result-section">
+            <div class="result-title">Raison principale</div>
+            <div class="result-value" id="prediction-reason">Chargement...</div>
+        </div>
+
+        <div class="result-section">
+            <div class="result-title">Status</div>
+            <div class="result-value" id="prediction-status">Chargement...</div>
+        </div>
+
+        <div class="result-section">
+            <div class="result-title">Description raison</div>
+            <div class="result-value" id="prediction-desc">Chargement...</div>
+        </div>
+
+        <div id="chart-container">
+            <img src="{{ url_for('static', filename='image/analyse_impact_caracteristiques_simple.png') }}">
+            
+            <button id="change-image-btn">
+                <img src="{{ url_for('static', filename='image/change.png') }}" alt="Changer l'image" />
+            </button>
+        </div>
+    </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+</body>
+
