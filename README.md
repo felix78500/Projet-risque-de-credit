@@ -40,7 +40,7 @@ Projet-risque-de-credit/
 
 Puis accéder à : [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
-## 📄 Documentation
+## Documentation
 
 La documentation technique est **La doc technique.pdf**, qui explique :
 - Le processus de nettoyage des données
